@@ -1,23 +1,23 @@
-# unocss-preset-rem-to-vw
+# unocss-preset-unit-to-vw
 
 ## Installation
 
 ```
-npm i -D unocss-preset-rem-to-vw
+npm i -D unocss-preset-unit-to-vw
 ```
 
 //vite.config.ts
 
 ```ts
 import presetUno from "@unocss/preset-uno"
-import presetRemToVw from "unocss-preset-rem-to-vw"
+import presetUnitToVw from "unocss-preset-unit-to-vw"
 export default defineConfig({
   plugins: [
     react(),
     Unocss({
       presets: [
         presetUno(),
-        presetRemToVw(/* preset options */ )
+        presetUnitToVw(/* preset options */ )
       ],
 
     }),
@@ -28,10 +28,11 @@ export default defineConfig({
 ### preset options
 
 ```ts
-interface PxToVwOptions {
+interface UnitToVwOptions {
 	baseFontSize?: number // defalut 16
 	baseWidth?: number // defalut 375
 	unitPrecision?: number // defalut 4
+	units?: string // defalut 'rem'
 }
 ```
 
