@@ -1,6 +1,6 @@
 {
   "name": "unocss-preset-unit-to-vw",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "unocss-preset-unit-to-vw",
   "main": "./dist/index.cjs",
   "scripts": {

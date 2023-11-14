@@ -2,6 +2,8 @@ import type { Preset } from '@unocss/core'
 
 const remRE = /(-?[\.\d]+)rem/g
 const pxRE = /(-?[\.\d]+)px/g
+const pwRE = /(-?[\.\d]+)pw/g
+const phRE = /(-?[\.\d]+)ph/g
 
 export interface UnitToVwOptions {
   /**
@@ -11,19 +13,24 @@ export interface UnitToVwOptions {
    */
   baseFontSize?: number
   baseWidth?: number
+  baseHeight?: number
   unitPrecision?: number
-  units?: string
+  units?: string[]
 }
 
 export default function presetUnitToVw(options: UnitToVwOptions = {}): Preset {
   const {
     baseFontSize = 16,
     baseWidth = 375,
+    baseHeight = 667,
     unitPrecision = 4,
-    units = 'rem',
+    units = ['rem'],
   } = options
 
-  const pxToVw = (px: number) => ((100 / baseWidth) * px).toFixed(unitPrecision)
+  const unitToVw = (value: number) =>
+    ((100 / baseWidth) * value).toFixed(unitPrecision)
+  const unitToVh = (value: number) =>
+    ((100 / baseHeight) * value).toFixed(unitPrecision)
 
   return {
     name: 'preset-unit-to-vw',
@@ -34,10 +41,14 @@ export default function presetUnitToVw(options: UnitToVwOptions = {}): Preset {
           if (units.includes('rem') && remRE.test(value))
             i[1] = value.replace(
               remRE,
-              (_, p1) => `${pxToVw(p1 * baseFontSize)}vw`
+              (_, p1) => `${unitToVw(p1 * baseFontSize)}vw`
             )
           else if (units.includes('px') && pxRE.test(value))
-            i[1] = value.replace(pxRE, (_, p1) => `${pxToVw(p1)}vw`)
+            i[1] = value.replace(pxRE, (_, p1) => `${unitToVw(p1)}vw`)
+          else if (units.includes('pw') && pxRE.test(value))
+            i[1] = value.replace(pwRE, (_, p1) => `${unitToVw(p1)}vw`)
+          else if (units.includes('ph') && pxRE.test(value))
+            i[1] = value.replace(phRE, (_, p1) => `${unitToVh(p1)}vh`)
         }
       })
     },

@@ -31,8 +31,9 @@ export default defineConfig({
 interface UnitToVwOptions {
 	baseFontSize?: number // defalut 16
 	baseWidth?: number // defalut 375
+	baseHeight?: number // defalut 667
 	unitPrecision?: number // defalut 4
-	units?: string // defalut 'rem'
+	units?: string[] // defalut ['rem'] 可选值: 'rem', 'px', 'pw', 'ph'
 }
 ```
 
