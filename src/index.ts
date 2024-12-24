@@ -45,9 +45,9 @@ export default function presetUnitToVw(options: UnitToVwOptions = {}): Preset {
             )
           else if (units.includes('px') && pxRE.test(value))
             i[1] = value.replace(pxRE, (_, p1) => `${unitToVw(p1)}vw`)
-          else if (units.includes('pw') && pxRE.test(value))
+          else if (units.includes('pw') && pwRE.test(value))
             i[1] = value.replace(pwRE, (_, p1) => `${unitToVw(p1)}vw`)
-          else if (units.includes('ph') && pxRE.test(value))
+          else if (units.includes('ph') && phRE.test(value))
             i[1] = value.replace(phRE, (_, p1) => `${unitToVh(p1)}vh`)
         }
       })
